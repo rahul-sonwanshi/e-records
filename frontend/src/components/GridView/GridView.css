@@ -1,0 +1,30 @@
+.grid-container {
+  width: 100vw;
+}
+
+.grid-table {
+  width: 100vw;
+}
+
+.grid-row {
+  color: #000;
+}
+
+.grid-cell {
+  padding: 12px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  width: 100px;
+}
+
+.grid-header {
+  background-color: #343434;
+}
+
+.grid-header .grid-cell {
+  background-color: #f0f0f0;
+  border-bottom: 2px solid #ccc;
+  font-weight: 500;
+}
