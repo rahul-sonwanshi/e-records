@@ -33,6 +33,30 @@ h1 {
   line-height: 1.1;
 }
 
+.view-action-btns {
+  display: flex;
+  height: 30px;
+}
+
+.view-action {
+  cursor: pointer;
+}
+
+.view-action img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.view-action:hover {
+  background-color: #343434;
+}
+
+.query-area {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;

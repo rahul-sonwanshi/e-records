@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from "react";
 import "./GridView.css";
 import { Employee } from "../../interfaces/common.interface";
+import BunButton from "../BunButton/BunButton";
 
-const GridView: React.FC = () => {
-  const [employees, setEmployees] = useState<Employee[]>([]);
+interface GridViewProps {
+  employees: Employee[]; // Expect 'employees' prop, type Employee array
+  onDeleteEmployee: (employeeId: number) => void; // Expect 'onDeleteEmployee' prop, function
+}
 
-  useEffect(() => {
-    const fetchEmployeeData = async () => {
-      try {
-        const response = await fetch(
-          "https://jsonplaceholder.typicode.com/users"
-        );
-        const data: Employee[] = await response.json();
-        setEmployees(data.slice(0, 10));
-      } catch (error) {
-        console.error("Error fetching employee data:", error);
-      }
-    };
-
-    fetchEmployeeData();
-  }, []);
+const GridView: React.FC<GridViewProps> = ({ employees, onDeleteEmployee }) => {
   if (!employees || employees.length === 0) {
     return <p></p>;
   }
@@ -37,14 +25,22 @@ const GridView: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {employees.map((employee, empIndex) => (
             <tr className="grid-row" key={employee.id}>
-              {headers.map((header) => (
+              {headers.map((header, index) => (
                 <td key={`${employee.id}-${header}`} className="grid-cell">
                   {typeof employee[header as keyof Employee] === "object" &&
                   employee[header as keyof Employee] !== null
                     ? JSON.stringify(employee[header as keyof Employee])
                     : employee[header as keyof Employee]}
+                  {index === 0 ? (
+                    <BunButton
+                      employeeId={employees[empIndex].id}
+                      onDelete={onDeleteEmployee}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </td>
               ))}
             </tr>

@@ -6,9 +6,10 @@ import { Employee } from "../../interfaces/common.interface";
 interface TileProps {
   employee: Employee;
   onTileClick: (employeeId: number) => void;
+  onDelete: (employeeId: number) => void;
 }
 
-const Tile: React.FC<TileProps> = ({ employee, onTileClick }) => {
+const Tile: React.FC<TileProps> = ({ employee, onTileClick, onDelete }) => {
   return (
     <div className="tile" onClick={() => onTileClick(employee.id)}>
       <div className="tile-header">{employee.name}</div>
@@ -20,7 +21,7 @@ const Tile: React.FC<TileProps> = ({ employee, onTileClick }) => {
           <strong>Username:</strong> {employee.username}
         </p>
       </div>
-      <BunButton employeeId={employee.id} />
+      <BunButton employeeId={employee.id} onDelete={onDelete} />
     </div>
   );
 };

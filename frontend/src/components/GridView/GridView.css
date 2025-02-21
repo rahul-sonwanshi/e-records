@@ -1,9 +1,11 @@
 .grid-container {
   width: 100vw;
+  overflow-x: auto;
 }
 
 .grid-table {
   width: 100vw;
+  overflow-x: auto;
 }
 
 .grid-row {
@@ -17,6 +19,8 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   width: 100px;
+  position: relative;
+  text-align: center;
 }
 
 .grid-header {
