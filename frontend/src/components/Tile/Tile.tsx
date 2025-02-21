@@ -2,6 +2,7 @@ import React from "react";
 import "./Tile.css";
 import BunButton from "../BunButton/BunButton";
 import { Employee } from "../../interfaces/common.interface";
+import profileIcon from "../../assets/profile-circle.svg";
 
 interface TileProps {
   employee: Employee;
@@ -12,6 +13,7 @@ interface TileProps {
 const Tile: React.FC<TileProps> = ({ employee, onTileClick, onDelete }) => {
   return (
     <div className="tile" onClick={() => onTileClick(employee.id)}>
+      <img src={profileIcon} alt="profile-pic" />
       <div className="tile-header">{employee.name}</div>
       <div className="tile-details">
         <p>

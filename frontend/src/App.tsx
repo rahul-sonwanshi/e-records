@@ -5,11 +5,14 @@ import TileView from "./components/TileView/TileView";
 import tableViewIcon from "./assets/table-view.svg";
 import tileViewIcon from "./assets/tile-view.svg";
 import { Employee } from "./interfaces/common.interface";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 function App() {
   const [viewMode, setViewMode] = useState<"grid" | "tile">("tile"); // Union type for viewMode state
 
   const [employees, setEmployees] = useState<Employee[]>([]);
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
@@ -26,6 +29,21 @@ function App() {
 
     fetchEmployeeData();
   }, []);
+
+  const handleSearchChange = (term: string) => {
+    setSearchTerm(term); // Update searchTerm state when user types
+  };
+
+  const filteredEmployees = employees.filter((employee) => {
+    const searchLower = searchTerm.toLowerCase();
+    // Customize your search logic here - search in name, username, email, etc.
+    return (
+      employee.name.toLowerCase().includes(searchLower) ||
+      employee.username.toLowerCase().includes(searchLower) ||
+      employee.email.toLowerCase().includes(searchLower)
+      // Add more fields to search if needed
+    );
+  });
 
   const switchToGridView = (e: any) => {
     console.log(e);
@@ -48,7 +66,10 @@ function App() {
       <HorizontalMenu />
 
       <div className="query-area">
-        <div>E-Records</div>
+        <SearchBar
+          searchTerm={searchTerm}
+          onSearchChange={handleSearchChange}
+        />
         <div className="view-action-btns">
           <div
             className="view-action"
@@ -74,12 +95,12 @@ function App() {
       </div>
       {viewMode === "grid" ? (
         <GridView
-          employees={employees}
+          employees={filteredEmployees}
           onDeleteEmployee={handleDeleteEmployee}
         />
       ) : (
         <TileView
-          employees={employees}
+          employees={filteredEmployees}
           onDeleteEmployee={handleDeleteEmployee}
         />
       )}
