@@ -27,7 +27,8 @@ function App() {
     fetchEmployeeData();
   }, []);
 
-  const switchToGridView = () => {
+  const switchToGridView = (e: any) => {
+    console.log(e);
     setViewMode("grid");
   };
 
@@ -47,12 +48,26 @@ function App() {
       <HorizontalMenu />
 
       <div className="query-area">
-        <div>Search</div>
+        <div>E-Records</div>
         <div className="view-action-btns">
-          <div className="view-action" style={{ padding: "4px" }}>
+          <div
+            className="view-action"
+            style={
+              viewMode === "grid"
+                ? { padding: "4px", background: "#343434" }
+                : { padding: "4px", background: "#000" }
+            }
+          >
             <img src={tableViewIcon} alt="" onClick={switchToGridView} />
           </div>
-          <div className="view-action">
+          <div
+            className="view-action"
+            style={
+              viewMode === "tile"
+                ? { background: "#343434" }
+                : { background: "#000" }
+            }
+          >
             <img src={tileViewIcon} alt="" onClick={switchToTileView} />
           </div>
         </div>
