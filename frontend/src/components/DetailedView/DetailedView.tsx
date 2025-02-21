@@ -1,6 +1,8 @@
 import React from "react";
 import "./DetailedView.css";
 import { Employee } from "../../interfaces/common.interface";
+import closeBtnIcon from "../../assets/close-btn.svg";
+import profileIcon from "../../assets/profile-circle.svg";
 
 interface DetailedViewProps {
   employee: Employee;
@@ -8,28 +10,47 @@ interface DetailedViewProps {
 }
 
 const DetailedView: React.FC<DetailedViewProps> = ({ employee, onClose }) => {
+  const renderJSON = (obj: any, indentLevel: number = 0) => {
+    const indent = "  ".repeat(indentLevel);
+
+    return Object.entries(obj).map(([key, value]) => {
+      if (key.toLowerCase().includes("name")) {
+        return null;
+      }
+
+      return (
+        <div key={key} className="json-line">
+          <span className="json-key">
+            {indent}
+            {key}:{" "}
+          </span>
+          <span className="json-value">
+            {typeof value === "object" && value !== null ? (
+              <div className="json-nested">
+                {renderJSON(value, indentLevel + 1)}
+              </div>
+            ) : (
+              String(value)
+            )}
+          </span>
+        </div>
+      );
+    });
+  };
+
   return (
     <div className="detailed-view-container">
       <div className="detailed-view">
-        <button className="close-button" onClick={onClose}>
-          X
-        </button>
-        <div className="detailed-employee-info">
-          <h2>{employee.name}</h2>
-          <p>
-            <strong>ID:</strong> {employee.id}
-          </p>
-          <p>
-            <strong>Username:</strong> {employee.username}
-          </p>
-          <p>
-            <strong>Email:</strong> {employee.email}
-          </p>
-          <p>
-            <strong>Full Details from API:</strong> {/* for testing */}
-          </p>
-          <pre>{JSON.stringify(employee, null, 2)}</pre>
+        <div className="close-button" onClick={onClose}>
+          <img src={closeBtnIcon} alt="" />
         </div>
+        <div className="employee-heading">
+          <img src={profileIcon} alt="profile-pic" />
+          <div className="employee-name">{employee.name}</div>
+        </div>
+
+        {/* Adding the name here */}
+        <div className="detailed-employee-info">{renderJSON(employee)}</div>
       </div>
     </div>
   );
