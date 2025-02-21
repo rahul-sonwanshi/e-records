@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HorizontalMenu from "./components/HorizontalMenu/HorizontalMenu";
 import GridView from "./components/GridView/GridView";
 import TileView from "./components/TileView/TileView";

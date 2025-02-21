@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./TileView.css";
 import Tile from "../Tile/Tile";
 import { Employee } from "../../interfaces/common.interface";

@@ -7,11 +7,7 @@ interface BunButtonProps {
   children?: React.ReactNode;
 }
 
-const BunButton: React.FC<BunButtonProps> = ({
-  employeeId,
-  onDelete,
-  children,
-}) => {
+const BunButton: React.FC<BunButtonProps> = ({ employeeId, onDelete }) => {
   const [isOptionsOpen, setIsOptionsOpen] = useState<boolean>(false);
 
   const toggleOptions = (e: React.MouseEvent<HTMLElement>) => {
